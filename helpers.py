@@ -18,8 +18,9 @@ def display_trials(trials, true_value=None, percentile_bounds=None):
     if true_value:
         plt.axvline(true_value, color='k', linestyle='dashed', linewidth=1, label='True Value')
     if percentile_bounds:
-        plt.axvline(trials[int(len(trials) * percentile_bounds)], color='r', linestyle='dashed', linewidth=1, label=f'{int(percentile_bounds*100)}th percentile')
-        plt.axvline(trials[-int(len(trials) * percentile_bounds)], color='r', linestyle='dashed', linewidth=1)
+        two_sided = (percentile_bounds + 1.0) / 2
+        plt.axvline(trials[int(len(trials) * two_sided)], color='r', linestyle='dashed', linewidth=1, label=f'{int(percentile_bounds*100)}th percentile')
+        plt.axvline(trials[-int(len(trials) * two_sided)], color='r', linestyle='dashed', linewidth=1)
     plt.hist(trials)
     plt.legend()
     plt.show()
